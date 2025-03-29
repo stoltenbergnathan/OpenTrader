@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Http.HttpResults;
 using WebAPI.Data.Repositories;
 using WebAPI.Models;
 
@@ -18,8 +19,32 @@ public class TradeService : ITradeService
         return await _tradeRepository.GetAllAsync();
     }
 
-    public async Task AddTradeEntryAsync(TradeEntry tradeEntry)
+    public async Task<TradeEntry?> GetTradeByIdAsync(int id)
     {
-        await _tradeRepository.AddAsync(tradeEntry);
+        return await _tradeRepository.GetByIdAsync(id);
     }
+
+    public async Task<TradeEntry> AddTradeEntryAsync(TradeEntry tradeEntry)
+    {
+        if (tradeEntry.Trades == null || tradeEntry.Trades.Count == 0)
+        {
+            throw new ArgumentException("A TradeEntry must have at least one associated trade.");
+        }
+        return await _tradeRepository.AddAsync(tradeEntry);
+    }
+
+    public async Task<TradeEntry?> UpdateTradeEntryAsync(int id, TradeEntry tradeEntry)
+    {
+        if (tradeEntry.Trades == null || tradeEntry.Trades.Count == 0)
+        {
+            throw new ArgumentException("A TradeEntry must have at least one associated trade.");
+        }
+        return await _tradeRepository.UpdateAsync(id, tradeEntry);
+    }
+
+    public async Task<TradeEntry?> DeleteTradeEntryAsync(int id)
+    {
+        return await _tradeRepository.DeleteAsync(id);
+    }
+
 }

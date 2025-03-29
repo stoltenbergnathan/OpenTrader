@@ -5,5 +5,8 @@ namespace WebAPI.Services;
 public interface ITradeService
 {
     Task<IEnumerable<TradeEntry>> GetAllTradesAsync();
-    Task AddTradeEntryAsync(TradeEntry tradeEntry);
+    Task<TradeEntry?> GetTradeByIdAsync(int id);
+    Task<TradeEntry> AddTradeEntryAsync(TradeEntry tradeEntry);
+    Task<TradeEntry?> UpdateTradeEntryAsync(int id, TradeEntry tradeEntry);
+    Task<TradeEntry?> DeleteTradeEntryAsync(int id);
 }
