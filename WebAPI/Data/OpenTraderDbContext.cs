@@ -23,7 +23,10 @@ public class OpenTraderDbContext : DbContext
             .ValueGeneratedOnAdd();
 
         modelBuilder.Entity<TradeEntry>()
-            .HasMany(te => te.Trades);
+            .HasMany(te => te.Trades)
+            .WithOne(t => t.TradeEntry)
+            .HasForeignKey(t => t.TradeEntryId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Trade>()
             .HasKey(t => t.Id);

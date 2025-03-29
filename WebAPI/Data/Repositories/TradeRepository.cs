@@ -14,13 +14,16 @@ public class TradeRepository : ITradeRepository
 
     public async Task<IEnumerable<TradeEntry>> GetAllAsync()
     {
-        return await _context.TradeEntries.ToListAsync();
+        return await _context.TradeEntries
+            .Include(te => te.Trades)
+            .ToListAsync();
     }
 
     public async Task<TradeEntry?> GetByIdAsync(int id)
     {
         return await _context.TradeEntries
-            .Where(tradeEntry => tradeEntry.Id == id)
+            .Where(te => te.Id == id)
+            .Include(te => te.Trades)
             .FirstOrDefaultAsync();
     }
 
@@ -33,7 +36,7 @@ public class TradeRepository : ITradeRepository
 
     public async Task<TradeEntry?> UpdateAsync(int id, TradeEntry updatedTradeEntry)
     {
-        var existingTrade = await _context.TradeEntries.FirstOrDefaultAsync(tradeEntry => tradeEntry.Id == id);
+        var existingTrade = await _context.TradeEntries.FirstOrDefaultAsync(te => te.Id == id);
 
         if (existingTrade == null)
         {
@@ -48,7 +51,7 @@ public class TradeRepository : ITradeRepository
 
     public async Task<TradeEntry?> DeleteAsync(int id)
     {
-        var tradeToDelete = await _context.TradeEntries.FirstOrDefaultAsync(tradeEntry => tradeEntry.Id == id);
+        var tradeToDelete = await _context.TradeEntries.FirstOrDefaultAsync(te => te.Id == id);
 
         if (tradeToDelete == null)
         {
