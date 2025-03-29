@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Models;
 
 namespace WebAPI;
 
@@ -10,14 +11,6 @@ public class OpenTraderDbContext : DbContext
     public OpenTraderDbContext(DbContextOptions<OpenTraderDbContext> options)
         : base(options)
     {
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlite("Data Source=opentrader.db");
-        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
