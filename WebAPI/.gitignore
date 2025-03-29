@@ -37,3 +37,5 @@ wwwroot/
 # Visual Studio 2015
 .vs/
 
+# Database files
+*.db
