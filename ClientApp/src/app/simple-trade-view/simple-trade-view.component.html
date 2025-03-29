@@ -1,0 +1,18 @@
+<td>
+  {{ lastTrade.date | date : "MM/dd/yyyy" }}
+</td>
+<td>
+  {{ tradeEntry.symbol }}
+</td>
+<td>
+  {{ totalQuantity }}
+</td>
+<td>
+  {{ entryTotal | currency : "USD" }}
+</td>
+<td>
+  {{ exitTotal | currency : "USD" }}
+</td>
+<td>
+  {{ profit | currency : "USD" }}
+</td>

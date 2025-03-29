@@ -1,0 +1,109 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="addTradeModalLabel">Add Trade</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="tradeEntryForm">
+    <div class="row mb-3">
+      <div class="col">
+        <label for="tradeType" class="form-label">Trade Type</label>
+        <select
+          id="tradeType"
+          class="form-select"
+          formControlName="type"
+          required
+        >
+          <option value="" disabled selected>Select Trade Type</option>
+          <option value="stock">Stock</option>
+          <option value="option">Option</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="symbol" class="form-label">Symbol</label>
+        <input
+          id="symbol"
+          class="form-control"
+          formControlName="symbol"
+          required
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Action</th>
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="trades">
+          <tr
+            *ngFor="let trade of trades.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <td>
+              <button
+                type="button"
+                class="btn btn-danger btn-sm rounded-circle"
+                (click)="removeTradeRow(i)"
+              >
+                X
+              </button>
+            </td>
+            <td>
+              <select class="form-select" formControlName="action" required>
+                <option value="" disabled selected>Select Action</option>
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="datetime-local"
+                class="form-control"
+                formControlName="date"
+                required
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="quantity"
+                required
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="price"
+                required
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="addTradeRow()">
+          Add Trade Row
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="cancel()">
+    Cancel
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="tradeEntryForm.invalid || trades.length === 0"
+    (click)="submitTradeEntry()"
+  >
+    Add Trade
+  </button>
+</div>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <Target Name="BuildAngular" BeforeTargets="Build">
+    <Exec Command="npm install" />
+    <Exec Command="npm run build" />
+  </Target>
+  
+</Project>
