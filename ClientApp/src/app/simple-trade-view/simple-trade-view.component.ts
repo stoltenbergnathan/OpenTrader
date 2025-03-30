@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { TradeService } from '../trade.service';
 
 @Component({
   selector: '[app-simple-trade-view]',
@@ -10,6 +11,8 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 })
 export class SimpleTradeViewComponent {
   @Input() tradeEntry!: TradeEntry;
+
+  constructor(private tradeService: TradeService) {}
 
   get lastTrade(): Trade {
     return this.tradeEntry.trades[this.tradeEntry.trades.length - 1];
@@ -29,5 +32,28 @@ export class SimpleTradeViewComponent {
 
   get profit(): number {
     return this.exitTotal - this.entryTotal;
+  }
+
+  // this.tradeService.addTrade(tradeEntry).subscribe({
+  //         next: (response) => {
+  //           // Handle successful response here
+  //           console.log('Trade entry added successfully:', response);
+  //           this.activeModal.close('Trade entry added');
+  //         }
+  //         , error: (error) => {
+  //           // Handle error response here
+  //           console.error('Error adding trade entry:', error);
+  //           // Optionally, you can show an error message to the user
+  //         }
+  //       });
+  deleteTrade() {
+    this.tradeService.deleteTrade(this.tradeEntry).subscribe({
+      next: (response) => {
+        console.log("Deleted trade: ", response)
+      },
+      error: (error) => {
+        console.log("Error: ", error)
+      }
+    });
   }
 }

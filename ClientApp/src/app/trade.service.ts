@@ -20,13 +20,18 @@ export class TradeService {
     )
   }
 
-  addTrade(trade: TradeEntry): Observable<TradeEntry> {
-    const formattedTrade = { ...trade, date: new Date().toISOString() };
+  addTrade(tradeEntry: TradeEntry): Observable<TradeEntry> {
+    const formattedTrade = { ...tradeEntry, date: new Date().toISOString() };
     return this.http.post<TradeEntry>(`${environment.apiUrl}/api/trades`, formattedTrade);
   }
 
-  updateTrade(trade: TradeEntry): Observable<TradeEntry> {
-    const formattedTrade = { ...trade, date: new Date().toISOString() };
-    return this.http.put<TradeEntry>(`${environment.apiUrl}/api/trades/${trade.id}`, formattedTrade);
+  updateTrade(tradeEntry: TradeEntry): Observable<TradeEntry> {
+    const formattedTrade = { ...tradeEntry, date: new Date().toISOString() };
+    return this.http.put<TradeEntry>(`${environment.apiUrl}/api/trades/${tradeEntry.id}`, formattedTrade);
+  }
+
+  deleteTrade(tradeEntry: TradeEntry): Observable<TradeEntry> {
+    const formattedTrade = { ...tradeEntry, date: new Date().toISOString() };
+    return this.http.delete<TradeEntry>(`${environment.apiUrl}/api/trades/${tradeEntry.id}`, { body: formattedTrade });
   }
 }
