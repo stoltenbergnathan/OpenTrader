@@ -24,10 +24,6 @@ export class TradeService {
 
   addTrade(trade: TradeEntry): Observable<TradeEntry> {
     const formattedTrade = { ...trade, date: new Date().toISOString() };
-    return this.http.post<TradeEntry>(`${environment.apiUrl}/api/trade`, formattedTrade);
-  }
-
-  testApi() {
-    return this.http.get<string>(`${environment.apiUrl}/api/test`, { responseType: 'text' as 'json' });
+    return this.http.post<TradeEntry>(`${environment.apiUrl}/api/trades`, formattedTrade);
   }
 }
