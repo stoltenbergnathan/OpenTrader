@@ -48,8 +48,8 @@ export class AddTradeModalComponent {
   };
 
   createTradeFormGroup(trade: Trade): any {
-
     return this.fb.group({
+      id: [trade.id],
       action: [trade.action, Validators.required],
       date: [this.formatDate(new Date(trade.date)), Validators.required],
       quantity: [trade.quantity, [Validators.required, Validators.min(1)]],
@@ -124,6 +124,7 @@ export class AddTradeModalComponent {
 
   private createEmptyTradeRow() {
     return this.fb.group({
+      id: [0],
       action: ['', Validators.required],
       date: [this.formatDate(new Date(Date.now())), Validators.required],
       quantity: ['', [Validators.required, Validators.min(1)]],
