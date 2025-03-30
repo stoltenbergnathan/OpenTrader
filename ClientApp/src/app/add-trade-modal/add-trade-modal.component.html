@@ -104,6 +104,6 @@
     [disabled]="tradeEntryForm.invalid || trades.length === 0"
     (click)="submitTradeEntry()"
   >
-    Add Trade
+    {{ tradeEntry ? "Edit Trade" : "Add Trade" }}
   </button>
 </div>

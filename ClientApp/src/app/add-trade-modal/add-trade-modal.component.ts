@@ -64,11 +64,11 @@ export class AddTradeModalComponent {
   submitTradeEntry() {
     if (this.tradeEntryForm.valid) {
       let tradeEntry: TradeEntry = {
-        id: 0,
+        id: this.tradeEntry ? this.tradeEntry.id : 0,
         type: this.tradeEntryForm.value.type,
         symbol: this.tradeEntryForm.value.symbol,
         trades: this.tradeEntryForm.value.trades.map((trade: Trade) => ({
-          id: 0,
+          id: trade.id !== 0 ? trade.id : 0,
           action: trade.action,
           date: new Date(trade.date).toISOString(),
           quantity: trade.quantity,
@@ -77,18 +77,35 @@ export class AddTradeModalComponent {
         notes: this.tradeEntryForm.value.notes,
       };
 
-      this.tradeService.addTrade(tradeEntry).subscribe({
-        next: (response) => {
-          // Handle successful response here
-          console.log('Trade entry added successfully:', response);
-          this.activeModal.close('Trade entry added');
-        }
-        , error: (error) => {
-          // Handle error response here
-          console.error('Error adding trade entry:', error);
-          // Optionally, you can show an error message to the user
-        }
-      });
+      if (!this.tradeEntry)
+      {
+        this.tradeService.addTrade(tradeEntry).subscribe({
+          next: (response) => {
+            // Handle successful response here
+            console.log('Trade entry added successfully:', response);
+            this.activeModal.close('Trade entry added');
+          }
+          , error: (error) => {
+            // Handle error response here
+            console.error('Error adding trade entry:', error);
+            // Optionally, you can show an error message to the user
+          }
+        });
+      }
+      else {
+        this.tradeService.updateTrade(tradeEntry).subscribe({
+          next: (response) => {
+            // Handle successful response here
+            console.log('Trade entry updated successfully:', response);
+            this.activeModal.close('Trade entry updated');
+          }
+          , error: (error) => {
+            // Handle error response here
+            console.error('Error adding trade entry:', error);
+            // Optionally, you can show an error message to the user
+          }
+        });       
+      }
     }
   }
 
