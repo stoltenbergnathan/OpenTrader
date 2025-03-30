@@ -12,7 +12,7 @@ export class NavMenuComponent {
   private modalService = inject(NgbModal);
 
   openAddTradeModal() {
-    this.modalService.open(AddTradeModalComponent);
+    this.modalService.open(AddTradeModalComponent, {size: 'lg'});
   }
 
 }

@@ -38,19 +38,20 @@ export class AddTradeModalComponent {
     }
   }
 
+  private formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
   createTradeFormGroup(trade: Trade): any {
-    const formatDate = (date: Date) => {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
-      return `${year}-${month}-${day}T${hours}:${minutes}`;
-    };
 
     return this.fb.group({
       action: [trade.action, Validators.required],
-      date: [formatDate(new Date(trade.date)), Validators.required],
+      date: [this.formatDate(new Date(trade.date)), Validators.required],
       quantity: [trade.quantity, [Validators.required, Validators.min(1)]],
       price: [trade.price, [Validators.required, Validators.min(0)]],
     });
@@ -63,10 +64,11 @@ export class AddTradeModalComponent {
   submitTradeEntry() {
     if (this.tradeEntryForm.valid) {
       let tradeEntry: TradeEntry = {
-        id: -1,
+        id: 0,
         type: this.tradeEntryForm.value.type,
         symbol: this.tradeEntryForm.value.symbol,
         trades: this.tradeEntryForm.value.trades.map((trade: Trade) => ({
+          id: 0,
           action: trade.action,
           date: new Date(trade.date).toISOString(),
           quantity: trade.quantity,
@@ -106,7 +108,7 @@ export class AddTradeModalComponent {
   private createEmptyTradeRow() {
     return this.fb.group({
       action: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [this.formatDate(new Date(Date.now())), Validators.required],
       quantity: ['', [Validators.required, Validators.min(1)]],
       price: ['', [Validators.required, Validators.min(0)]],
     });
