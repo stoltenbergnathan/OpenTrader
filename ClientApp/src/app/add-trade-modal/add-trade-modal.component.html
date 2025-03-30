@@ -45,6 +45,7 @@
           >
             <td>
               <button
+                *ngIf="i !== 0"
                 type="button"
                 class="btn btn-danger btn-sm rounded-circle"
                 (click)="removeTradeRow(i)"

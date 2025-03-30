@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } fr
 import { TradeService } from '../trade.service';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
 import { QuillModule } from 'ngx-quill';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-trade-modal',
-  imports: [ReactiveFormsModule, QuillModule, NgFor],
+  imports: [ReactiveFormsModule, QuillModule, NgFor, NgIf],
   standalone: true,
   templateUrl: './add-trade-modal.component.html',
   styleUrl: './add-trade-modal.component.css'
