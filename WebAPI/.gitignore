@@ -38,4 +38,4 @@ wwwroot/
 .vs/
 
 # Database files
-*.db
+*.db*
