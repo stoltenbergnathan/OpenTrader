@@ -5,7 +5,7 @@
   {{ tradeEntry.symbol }}
 </td>
 <td>
-  {{ totalQuantity }}
+  {{ totalQuantity === 0 ? "closed" : totalQuantity }}
 </td>
 <td>
   {{ entryTotal | currency : "USD" }}

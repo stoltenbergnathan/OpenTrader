@@ -19,7 +19,16 @@ export class SimpleTradeViewComponent {
   }
 
   get totalQuantity(): number {
-    return this.tradeEntry.trades.reduce((total, trade) => total + trade.quantity, 0);
+    return this.tradeEntry.trades.reduce((total, trade) => {
+      if (trade.action === "buy")
+      {
+        return total + trade.quantity 
+      }
+      else
+      {
+        return total - trade.quantity
+      }
+    }, 0);
   }
 
   get entryTotal(): number {
