@@ -5,10 +5,11 @@ import { Trade, TradeEntry } from '../shared/models/trade.model';
 import { QuillModule } from 'ngx-quill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddTradeModalDetailsListComponent } from './add-trade-modal-details-list.component';
+import { AddTradeModalHeaderComponent } from './add-trade-modal-header.component';
 
 @Component({
   selector: 'app-add-trade-modal',
-  imports: [ReactiveFormsModule, QuillModule, AddTradeModalDetailsListComponent],
+  imports: [ReactiveFormsModule, QuillModule, AddTradeModalDetailsListComponent, AddTradeModalHeaderComponent],
   standalone: true,
   templateUrl: './add-trade-modal.component.html'
 })
