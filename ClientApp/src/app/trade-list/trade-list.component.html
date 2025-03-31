@@ -12,10 +12,10 @@
   <tbody>
     <tr
       style="cursor: pointer"
-      *ngFor="let trade of trades"
+      *ngFor="let tradeEntry of tradeEntries"
       app-simple-trade-view
-      [tradeEntry]="trade"
-      (click)="onTradeClick(trade)"
+      [tradeEntry]="tradeEntry"
+      (click)="onTradeClick(tradeEntry)"
     ></tr>
   </tbody>
 </table>

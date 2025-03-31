@@ -15,13 +15,14 @@ import { AddTradeModalComponent } from '../add-trade-modal/add-trade-modal.compo
 export class TradeListComponent {
   private modalService = inject(NgbModal);
 
-  trades: TradeEntry[] = [];
+  tradeEntries: TradeEntry[] = [];
   constructor(private tradeService: TradeService) { }
 
   ngOnInit() {
-    this.tradeService.getTrades().subscribe(trades => {
-      this.trades = trades;
+    this.tradeService.tradeEntries$.subscribe(tradeEntries => {
+      this.tradeEntries = tradeEntries
     });
+    this.tradeService.getTrades().subscribe();
   }
 
   onTradeClick(trade: TradeEntry) {
