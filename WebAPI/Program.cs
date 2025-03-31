@@ -40,6 +40,12 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
 void ConfigureMiddleware(WebApplication app)
 {
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<OpenTraderDbContext>();
+        dbContext.Database.Migrate();
+    }
+
     // Configure the HTTP request pipeline
     if (app.Environment.IsDevelopment())
     {
