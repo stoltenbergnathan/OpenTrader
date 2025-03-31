@@ -70,7 +70,7 @@ export class AddTradeModalComponent {
         trades: this.tradeEntryForm.value.trades.map((trade: Trade) => ({
           id: trade.id !== 0 ? trade.id : 0,
           action: trade.action,
-          date: new Date(trade.date).toISOString(),
+          date: new Date(trade.date),
           quantity: trade.quantity,
           price: trade.price
         })),

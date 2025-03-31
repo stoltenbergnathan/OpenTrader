@@ -34,18 +34,6 @@ export class SimpleTradeViewComponent {
     return this.exitTotal - this.entryTotal;
   }
 
-  // this.tradeService.addTrade(tradeEntry).subscribe({
-  //         next: (response) => {
-  //           // Handle successful response here
-  //           console.log('Trade entry added successfully:', response);
-  //           this.activeModal.close('Trade entry added');
-  //         }
-  //         , error: (error) => {
-  //           // Handle error response here
-  //           console.error('Error adding trade entry:', error);
-  //           // Optionally, you can show an error message to the user
-  //         }
-  //       });
   deleteTrade() {
     this.tradeService.deleteTrade(this.tradeEntry).subscribe({
       next: (response) => {

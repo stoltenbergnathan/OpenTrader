@@ -15,23 +15,20 @@ export class TradeService {
     return this.http.get<TradeEntry[]>(`${environment.apiUrl}/api/trades`).pipe(
       map(tradeEntries => tradeEntries.map(entry => ({ 
         ...entry, 
-        trades: entry.trades.map(trade => ({ ...trade, date: new Date(trade.date) })) 
+        trades: entry.trades.map(trade => ({ ...trade, date: new Date(new Date(trade.date).toLocaleString()) })) 
       })))
     )
   }
 
   addTrade(tradeEntry: TradeEntry): Observable<TradeEntry> {
-    const formattedTrade = { ...tradeEntry, date: new Date().toISOString() };
-    return this.http.post<TradeEntry>(`${environment.apiUrl}/api/trades`, formattedTrade);
+    return this.http.post<TradeEntry>(`${environment.apiUrl}/api/trades`, tradeEntry);
   }
 
   updateTrade(tradeEntry: TradeEntry): Observable<TradeEntry> {
-    const formattedTrade = { ...tradeEntry, date: new Date().toISOString() };
-    return this.http.put<TradeEntry>(`${environment.apiUrl}/api/trades/${tradeEntry.id}`, formattedTrade);
+    return this.http.put<TradeEntry>(`${environment.apiUrl}/api/trades/${tradeEntry.id}`, tradeEntry);
   }
 
   deleteTrade(tradeEntry: TradeEntry): Observable<TradeEntry> {
-    const formattedTrade = { ...tradeEntry, date: new Date().toISOString() };
-    return this.http.delete<TradeEntry>(`${environment.apiUrl}/api/trades/${tradeEntry.id}`, { body: formattedTrade });
+    return this.http.delete<TradeEntry>(`${environment.apiUrl}/api/trades/${tradeEntry.id}`, { body: tradeEntry });
   }
 }
