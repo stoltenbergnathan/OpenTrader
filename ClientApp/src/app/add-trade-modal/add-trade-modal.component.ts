@@ -10,8 +10,7 @@ import { AddTradeModalDetailsListComponent } from './add-trade-modal-details-lis
   selector: 'app-add-trade-modal',
   imports: [ReactiveFormsModule, QuillModule, AddTradeModalDetailsListComponent],
   standalone: true,
-  templateUrl: './add-trade-modal.component.html',
-  styleUrl: './add-trade-modal.component.css'
+  templateUrl: './add-trade-modal.component.html'
 })
 export class AddTradeModalComponent {
   @Input() tradeEntry!: TradeEntry;
@@ -110,14 +109,6 @@ export class AddTradeModalComponent {
   cancel() {
     this.tradeEntryForm.reset();
     this.activeModal.dismiss('Cross click');
-  }
-
-  addTradeRow() {
-    this.trades.push(this.createEmptyTradeRow());
-  }
-
-  removeTradeRow(index: number) {
-    this.trades.removeAt(index);
   }
 
   private createEmptyTradeRow() {
