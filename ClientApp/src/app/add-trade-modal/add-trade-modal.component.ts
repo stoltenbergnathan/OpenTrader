@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { TradeService } from '../trade.service';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
@@ -14,12 +14,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './add-trade-modal.component.css'
 })
 export class AddTradeModalComponent {
-  activeModal = inject(NgbActiveModal);
-
   @Input() tradeEntry!: TradeEntry;
   tradeEntryForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private tradeService: TradeService) {
+  constructor(private fb: FormBuilder, private tradeService: TradeService, private activeModal: NgbActiveModal) {
     this.tradeEntryForm = this.fb.group({
       type: ['', Validators.required],
       symbol: ['', Validators.required],
