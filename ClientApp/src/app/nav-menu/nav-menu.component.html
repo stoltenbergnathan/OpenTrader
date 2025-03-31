@@ -1,26 +1,19 @@
-<div class="d-flex">
-  <nav class="navbar navbar-light bg-light flex-column vh-100 border-end p-5">
-    <div>
-      <ul class="navbar-nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Calendar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Tools</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Help</a>
-        </li>
+<div class="h-screen flex flex-col bg-gray-800 text-white">
+  <nav class="flex flex-col h-full">
+    <div class="flex-grow">
+      <ul class="p-4">
+        <app-nav-button text="Dashboard" linkTo="/dashboard"></app-nav-button>
+        <app-nav-button text="Calendar" linkTo="/calendar"></app-nav-button>
+        <app-nav-button text="Tools" linkTo="/tools"></app-nav-button>
+        <app-nav-button text="Settings" linkTo="/settings"></app-nav-button>
+        <app-nav-button text="Help" linkTo="/help"></app-nav-button>
       </ul>
     </div>
-    <div class="mt-auto">
-      <button class="btn btn-primary" (click)="openAddTradeModal()">
+    <div class="p-4">
+      <button
+        class="w-full py-2 px-4 bg-blue-600 rounded hover:bg-blue-700"
+        (click)="openAddTradeModal()"
+      >
         + Add Trade
       </button>
     </div>
