@@ -6,10 +6,17 @@ import { QuillModule } from 'ngx-quill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddTradeModalDetailsListComponent } from './add-trade-modal-details-list.component';
 import { AddTradeModalHeaderComponent } from './add-trade-modal-header.component';
+import { AddTradeModalTabComponent } from './add-trade-modal-tab.component';
 
 @Component({
   selector: 'app-add-trade-modal',
-  imports: [ReactiveFormsModule, QuillModule, AddTradeModalDetailsListComponent, AddTradeModalHeaderComponent],
+  imports: [
+    ReactiveFormsModule,
+    QuillModule,
+    AddTradeModalDetailsListComponent,
+    AddTradeModalHeaderComponent,
+    AddTradeModalTabComponent
+  ],
   standalone: true,
   templateUrl: './add-trade-modal.component.html'
 })
