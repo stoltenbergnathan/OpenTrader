@@ -1,56 +1,61 @@
-<div class="row mb-3" [formGroup]="this.tradeForm">
-  <table class="table table-borderless">
+<div class="mb-3" [formGroup]="tradeForm">
+  <table class="w-full border-collapse">
     <thead>
-      <tr>
-        <th></th>
-        <th>Action</th>
-        <th>Date</th>
-        <th>Quantity</th>
-        <th>Price</th>
+      <tr class="border-b">
+        <th class="p-2"></th>
+        <th class="p-2 text-left">Action</th>
+        <th class="p-2 text-left">Date</th>
+        <th class="p-2 text-left">Quantity</th>
+        <th class="p-2 text-left">Price</th>
       </tr>
     </thead>
     <tbody formArrayName="trades">
       <tr
         *ngFor="let trade of trades.controls; let i = index"
         [formGroupName]="i"
+        class="border-b"
       >
-        <td>
+        <td class="p-2">
           <button
             *ngIf="i !== 0"
             type="button"
-            class="btn btn-danger btn-sm rounded-circle"
+            class="w-6 h-6 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600"
             (click)="removeTradeRow(i)"
           >
             X
           </button>
         </td>
-        <td>
-          <select class="form-select" formControlName="action" required>
+        <td class="p-2">
+          <select
+            class="w-full border rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+            formControlName="action"
+            required
+          >
             <option value="" disabled selected>Select Action</option>
             <option value="buy">Buy</option>
             <option value="sell">Sell</option>
           </select>
         </td>
-        <td>
+        <td class="p-2">
           <input
             type="datetime-local"
-            class="form-control"
+            class="w-full border rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
             formControlName="date"
             required
           />
         </td>
-        <td>
+        <td class="p-2">
           <input
             type="number"
-            class="form-control"
+            class="w-full border rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
             formControlName="quantity"
             required
           />
         </td>
-        <td>
+        <td class="p-2">
           <input
             type="text"
-            class="form-control"
+            class="w-full border rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
             formControlName="price"
             required
           />
@@ -58,8 +63,13 @@
       </tr>
     </tbody>
   </table>
-  <div class="col">
-    <button type="button" class="btn btn-primary" (click)="addTradeRow()">
+
+  <div class="mt-4">
+    <button
+      type="button"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+      (click)="addTradeRow()"
+    >
       Add Trade Row
     </button>
   </div>

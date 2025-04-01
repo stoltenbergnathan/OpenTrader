@@ -1,24 +1,18 @@
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item" role="presentation">
+<ul class="flex border-b">
+  <li>
     <button
-      class="nav-link active"
-      id="trade-details-tab"
-      data-bs-toggle="tab"
-      data-bs-target="#trade-details"
+      class="py-2 px-4 border-b-2 border-blue-500 font-medium text-blue-500"
       type="button"
-      role="tab"
+      (click)="activateTab(0)"
     >
       Trade Details
     </button>
   </li>
-  <li class="nav-item" role="presentation">
+  <li>
     <button
-      class="nav-link"
-      id="trade-notes-tab"
-      data-bs-toggle="tab"
-      data-bs-target="#trade-notes"
+      class="py-2 px-4 border-b-2 border-transparent hover:border-gray-300 text-gray-600"
       type="button"
-      role="tab"
+      (click)="activateTab(1)"
     >
       Notes
     </button>

@@ -6,10 +6,12 @@ import { AddTradeModalTabComponent } from './add-trade-modal-tab.component';
 import { AddTradeModalFooterComponent } from './add-trade-modal-footer.component';
 import { AddTradeModalNotesComponent } from './add-trade-modal-notes.component';
 import { AddTradeModalFormComponent } from "./add-trade-modal-form.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-trade-modal',
   imports: [
+    NgIf,
     ReactiveFormsModule,
     AddTradeModalHeaderComponent,
     AddTradeModalTabComponent,
@@ -23,6 +25,7 @@ import { AddTradeModalFormComponent } from "./add-trade-modal-form.component";
 export class AddTradeModalComponent {
   @Input() tradeEntry!: TradeEntry;
   tradeEntryForm: FormGroup;
+  currentTab: number = 0;
 
   constructor(private fb: FormBuilder) {
     this.tradeEntryForm = this.fb.group({
@@ -60,6 +63,10 @@ export class AddTradeModalComponent {
       quantity: [trade.quantity, [Validators.required, Validators.min(1)]],
       price: [trade.price, [Validators.required, Validators.min(0)]],
     });
+  }
+
+  switchTab(tab: number) {
+    this.currentTab = tab;
   }
 
   get trades(): FormArray {
