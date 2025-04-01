@@ -33,11 +33,12 @@
         ></app-add-trade-modal-details-list>
       </form>
     </div>
-    <div class="tab-pane fade" id="trade-notes" role="tabpanel">
-      <form [formGroup]="tradeEntryForm">
-        <quill-editor formControlName="notes"></quill-editor>
-      </form>
-    </div>
+    <app-add-trade-modal-notes
+      class="tab-pane fade"
+      id="trade-notes"
+      role="tabpanel"
+      [tradeEntryForm]="this.tradeEntryForm"
+    ></app-add-trade-modal-notes>
   </div>
 </div>
 <app-add-trade-modal-footer
