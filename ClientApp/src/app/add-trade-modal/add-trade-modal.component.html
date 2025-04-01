@@ -40,16 +40,7 @@
     </div>
   </div>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="cancel()">
-    Cancel
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary"
-    [disabled]="tradeEntryForm.invalid || trades.length === 0"
-    (click)="submitTradeEntry()"
-  >
-    {{ tradeEntry ? "Edit Trade" : "Add Trade" }}
-  </button>
-</div>
+<app-add-trade-modal-footer
+  [tradeEntry]="this.tradeEntry"
+  [tradeEntryForm]="this.tradeEntryForm"
+></app-add-trade-modal-footer>

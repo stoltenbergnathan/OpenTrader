@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
-import { TradeService } from '../trade.service';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
 import { QuillModule } from 'ngx-quill';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddTradeModalDetailsListComponent } from './add-trade-modal-details-list.component';
 import { AddTradeModalHeaderComponent } from './add-trade-modal-header.component';
 import { AddTradeModalTabComponent } from './add-trade-modal-tab.component';
+import { AddTradeModalFooterComponent } from './add-trade-modal-footer.component';
 
 @Component({
   selector: 'app-add-trade-modal',
@@ -15,7 +14,8 @@ import { AddTradeModalTabComponent } from './add-trade-modal-tab.component';
     QuillModule,
     AddTradeModalDetailsListComponent,
     AddTradeModalHeaderComponent,
-    AddTradeModalTabComponent
+    AddTradeModalTabComponent,
+    AddTradeModalFooterComponent
   ],
   standalone: true,
   templateUrl: './add-trade-modal.component.html'
@@ -24,11 +24,11 @@ export class AddTradeModalComponent {
   @Input() tradeEntry!: TradeEntry;
   tradeEntryForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private tradeService: TradeService, private activeModal: NgbActiveModal) {
+  constructor(private fb: FormBuilder) {
     this.tradeEntryForm = this.fb.group({
       type: ['', Validators.required],
       symbol: ['', Validators.required],
-      trades: this.fb.array([this.createEmptyTradeRow()]), // Ensure at least one trade row
+      trades: this.fb.array([this.createEmptyTradeRow()]),
       notes: ['']
     });
   }
@@ -38,7 +38,7 @@ export class AddTradeModalComponent {
       this.tradeEntryForm.patchValue(this.tradeEntry);
       const tradesArray = this.tradeEntry.trades.length
         ? this.tradeEntry.trades.map(trade => this.createTradeFormGroup(trade))
-        : [this.createEmptyTradeRow()]; // Ensure at least one trade row
+        : [this.createEmptyTradeRow()];
       this.tradeEntryForm.setControl('trades', this.fb.array(tradesArray));
     }
   }
@@ -64,59 +64,6 @@ export class AddTradeModalComponent {
 
   get trades(): FormArray {
     return this.tradeEntryForm.get('trades') as FormArray;
-  }
-
-  submitTradeEntry() {
-    if (this.tradeEntryForm.valid) {
-      let tradeEntry: TradeEntry = {
-        id: this.tradeEntry ? this.tradeEntry.id : 0,
-        type: this.tradeEntryForm.value.type,
-        symbol: this.tradeEntryForm.value.symbol,
-        trades: this.tradeEntryForm.value.trades.map((trade: Trade) => ({
-          id: trade.id !== 0 ? trade.id : 0,
-          action: trade.action,
-          date: new Date(trade.date),
-          quantity: trade.quantity,
-          price: trade.price
-        })),
-        notes: this.tradeEntryForm.value.notes,
-      };
-
-      if (!this.tradeEntry)
-      {
-        this.tradeService.addTrade(tradeEntry).subscribe({
-          next: (response) => {
-            // Handle successful response here
-            console.log('Trade entry added successfully:', response);
-            this.activeModal.close('Trade entry added');
-          }
-          , error: (error) => {
-            // Handle error response here
-            console.error('Error adding trade entry:', error);
-            // Optionally, you can show an error message to the user
-          }
-        });
-      }
-      else {
-        this.tradeService.updateTrade(tradeEntry).subscribe({
-          next: (response) => {
-            // Handle successful response here
-            console.log('Trade entry updated successfully:', response);
-            this.activeModal.close('Trade entry updated');
-          }
-          , error: (error) => {
-            // Handle error response here
-            console.error('Error adding trade entry:', error);
-            // Optionally, you can show an error message to the user
-          }
-        });       
-      }
-    }
-  }
-
-  cancel() {
-    this.tradeEntryForm.reset();
-    this.activeModal.dismiss('Cross click');
   }
 
   private createEmptyTradeRow() {
