@@ -2,17 +2,19 @@ import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
 import { TradeService } from '../trade.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { AddTradeModalComponent } from './add-trade-modal.component';
 
 @Component({
     selector: 'app-add-trade-modal-footer',
+    imports: [MatDialogModule],
     templateUrl: './add-trade-modal-footer.component.html'
 })
 export class AddTradeModalFooterComponent {
     @Input() tradeEntry!: TradeEntry;
     @Input() tradeEntryForm!: FormGroup;
 
-    constructor(private tradeService: TradeService, private activeModal: NgbActiveModal) { }
+    constructor(private tradeService: TradeService, private dialog: MatDialogRef<AddTradeModalComponent>) { }
 
     get trades(): FormArray {
         return this.tradeEntryForm.get('trades') as FormArray;
@@ -40,7 +42,7 @@ export class AddTradeModalFooterComponent {
                 next: (response) => {
                 // Handle successful response here
                 console.log('Trade entry added successfully:', response);
-                this.activeModal.close('Trade entry added');
+                this.dialog.close('Trade entry added');
                 }
                 , error: (error) => {
                 // Handle error response here
@@ -54,7 +56,7 @@ export class AddTradeModalFooterComponent {
                 next: (response) => {
                 // Handle successful response here
                 console.log('Trade entry updated successfully:', response);
-                this.activeModal.close('Trade entry updated');
+                this.dialog.close('Trade entry updated');
                 }
                 , error: (error) => {
                 // Handle error response here
@@ -68,6 +70,6 @@ export class AddTradeModalFooterComponent {
 
     cancel() {
         this.tradeEntryForm.reset();
-        this.activeModal.dismiss('Cross click');
+        this.dialog.close();
     }
 }

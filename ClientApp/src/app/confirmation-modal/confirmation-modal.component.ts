@@ -1,22 +1,22 @@
 import { Component, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirmation-modal',
-  imports: [],
+  imports: [MatDialogModule],
   templateUrl: './confirmation-modal.component.html',
   styleUrl: './confirmation-modal.component.css'
 })
 export class ConfirmationModalComponent {
   @Input() confirmationText: string = '';
 
-  constructor(private activeModal: NgbActiveModal) {}
+  constructor(private activeModal: MatDialogRef<ConfirmationModalComponent>) {}
 
   onConfirm() {
     this.activeModal.close('confirm');
   }
 
   onCancel() {
-    this.activeModal.dismiss();
+    this.activeModal.close();
   }
 }
