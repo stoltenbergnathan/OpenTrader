@@ -2,19 +2,18 @@ import { Component, Input } from '@angular/core';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { TradeService } from '../trade.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: '[app-simple-trade-view]',
-  imports: [DatePipe, CurrencyPipe],
-  templateUrl: './simple-trade-view.component.html',
-  styleUrl: './simple-trade-view.component.css'
+  imports: [DatePipe, CurrencyPipe, MatDialogModule],
+  templateUrl: './simple-trade-view.component.html'
 })
 export class SimpleTradeViewComponent {
   @Input() tradeEntry!: TradeEntry;
 
-  constructor(private tradeService: TradeService, private modalService: NgbModal) {}
+  constructor(private tradeService: TradeService, private dialog: MatDialog) {}
 
   get lastTrade(): Trade {
     return this.tradeEntry.trades[this.tradeEntry.trades.length - 1];
@@ -46,10 +45,10 @@ export class SimpleTradeViewComponent {
   }
 
   deleteTrade() {
-    const modalRef = this.modalService.open(ConfirmationModalComponent);
+    const modalRef = this.dialog.open(ConfirmationModalComponent);
     modalRef.componentInstance.confirmationText = "Are you sure you want to delete this trade?";
 
-    modalRef.closed.subscribe((reason) => {
+    modalRef.afterClosed().subscribe((reason) => {
       if (reason === "confirm")
       {
         this.tradeService.deleteTrade(this.tradeEntry).subscribe({

@@ -1,25 +1,25 @@
-<td>
+<td class="p-2.5">
   {{ lastTrade.date | date : "MM/dd/yyyy" }}
 </td>
-<td>
+<td class="p-2.5">
   {{ tradeEntry.symbol }}
 </td>
-<td>
+<td class="p-2.5">
   {{ totalQuantity === 0 ? "closed" : totalQuantity }}
 </td>
-<td>
+<td class="p-2.5">
   {{ entryTotal | currency : "USD" }}
 </td>
-<td>
+<td class="p-2.5">
   {{ exitTotal | currency : "USD" }}
 </td>
-<td>
+<td class="p-2.5">
   {{ profit | currency : "USD" }}
 </td>
-<td>
+<td class="p-2.5">
   <button
     type="button"
-    class="btn btn-danger btn-sm rounded-circle"
+    class="rounded-full text-white bg-red-700 hover:bg-red-800 px-3 py-1"
     (click)="deleteTrade(); $event.stopPropagation()"
   >
     X

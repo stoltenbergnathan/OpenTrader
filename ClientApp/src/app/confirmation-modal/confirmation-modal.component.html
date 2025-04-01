@@ -1,14 +1,22 @@
-<div class="modal-header">
-  <h5 class="modal-title">Are you Sure?</h5>
+<div class="border-b p-4">
+  <h5 class="text-lg font-semibold">Are you Sure?</h5>
 </div>
-<div class="modal-body">
-  {{ this.confirmationText }}
+<div class="p-4">
+  {{ confirmationText }}
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="onCancel()">
+<div class="flex justify-end gap-2 border-t p-4">
+  <button
+    type="button"
+    class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-4 py-2 rounded"
+    (click)="onCancel()"
+  >
     Cancel
   </button>
-  <button type="button" class="btn btn-primary" (click)="onConfirm()">
+  <button
+    type="button"
+    class="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded"
+    (click)="onConfirm()"
+  >
     Confirm
   </button>
 </div>

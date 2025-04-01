@@ -1,29 +1,37 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
-import { TradeService } from '../trade.service';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
-import { QuillModule } from 'ngx-quill';
-import { NgFor, NgIf } from '@angular/common';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddTradeModalHeaderComponent } from './add-trade-modal-header.component';
+import { AddTradeModalTabComponent } from './add-trade-modal-tab.component';
+import { AddTradeModalFooterComponent } from './add-trade-modal-footer.component';
+import { AddTradeModalNotesComponent } from './add-trade-modal-notes.component';
+import { AddTradeModalFormComponent } from "./add-trade-modal-form.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-trade-modal',
-  imports: [ReactiveFormsModule, QuillModule, NgFor, NgIf],
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    AddTradeModalHeaderComponent,
+    AddTradeModalTabComponent,
+    AddTradeModalFooterComponent,
+    AddTradeModalNotesComponent,
+    AddTradeModalFormComponent
+],
   standalone: true,
-  templateUrl: './add-trade-modal.component.html',
-  styleUrl: './add-trade-modal.component.css'
+  templateUrl: './add-trade-modal.component.html'
 })
 export class AddTradeModalComponent {
-  activeModal = inject(NgbActiveModal);
-
   @Input() tradeEntry!: TradeEntry;
   tradeEntryForm: FormGroup;
+  currentTab: number = 0;
 
-  constructor(private fb: FormBuilder, private tradeService: TradeService) {
+  constructor(private fb: FormBuilder) {
     this.tradeEntryForm = this.fb.group({
       type: ['', Validators.required],
       symbol: ['', Validators.required],
-      trades: this.fb.array([this.createEmptyTradeRow()]), // Ensure at least one trade row
+      trades: this.fb.array([this.createEmptyTradeRow()]),
       notes: ['']
     });
   }
@@ -33,7 +41,7 @@ export class AddTradeModalComponent {
       this.tradeEntryForm.patchValue(this.tradeEntry);
       const tradesArray = this.tradeEntry.trades.length
         ? this.tradeEntry.trades.map(trade => this.createTradeFormGroup(trade))
-        : [this.createEmptyTradeRow()]; // Ensure at least one trade row
+        : [this.createEmptyTradeRow()];
       this.tradeEntryForm.setControl('trades', this.fb.array(tradesArray));
     }
   }
@@ -57,69 +65,12 @@ export class AddTradeModalComponent {
     });
   }
 
+  switchTab(tab: number) {
+    this.currentTab = tab;
+  }
+
   get trades(): FormArray {
     return this.tradeEntryForm.get('trades') as FormArray;
-  }
-
-  submitTradeEntry() {
-    if (this.tradeEntryForm.valid) {
-      let tradeEntry: TradeEntry = {
-        id: this.tradeEntry ? this.tradeEntry.id : 0,
-        type: this.tradeEntryForm.value.type,
-        symbol: this.tradeEntryForm.value.symbol,
-        trades: this.tradeEntryForm.value.trades.map((trade: Trade) => ({
-          id: trade.id !== 0 ? trade.id : 0,
-          action: trade.action,
-          date: new Date(trade.date),
-          quantity: trade.quantity,
-          price: trade.price
-        })),
-        notes: this.tradeEntryForm.value.notes,
-      };
-
-      if (!this.tradeEntry)
-      {
-        this.tradeService.addTrade(tradeEntry).subscribe({
-          next: (response) => {
-            // Handle successful response here
-            console.log('Trade entry added successfully:', response);
-            this.activeModal.close('Trade entry added');
-          }
-          , error: (error) => {
-            // Handle error response here
-            console.error('Error adding trade entry:', error);
-            // Optionally, you can show an error message to the user
-          }
-        });
-      }
-      else {
-        this.tradeService.updateTrade(tradeEntry).subscribe({
-          next: (response) => {
-            // Handle successful response here
-            console.log('Trade entry updated successfully:', response);
-            this.activeModal.close('Trade entry updated');
-          }
-          , error: (error) => {
-            // Handle error response here
-            console.error('Error adding trade entry:', error);
-            // Optionally, you can show an error message to the user
-          }
-        });       
-      }
-    }
-  }
-
-  cancel() {
-    this.tradeEntryForm.reset();
-    this.activeModal.dismiss('Cross click');
-  }
-
-  addTradeRow() {
-    this.trades.push(this.createEmptyTradeRow());
-  }
-
-  removeTradeRow(index: number) {
-    this.trades.removeAt(index);
   }
 
   private createEmptyTradeRow() {
