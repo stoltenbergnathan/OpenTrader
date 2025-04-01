@@ -1,22 +1,22 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
-import { AddTradeModalDetailsListComponent } from './add-trade-modal-details-list.component';
 import { AddTradeModalHeaderComponent } from './add-trade-modal-header.component';
 import { AddTradeModalTabComponent } from './add-trade-modal-tab.component';
 import { AddTradeModalFooterComponent } from './add-trade-modal-footer.component';
 import { AddTradeModalNotesComponent } from './add-trade-modal-notes.component';
+import { AddTradeModalFormComponent } from "./add-trade-modal-form.component";
 
 @Component({
   selector: 'app-add-trade-modal',
   imports: [
     ReactiveFormsModule,
-    AddTradeModalDetailsListComponent,
     AddTradeModalHeaderComponent,
     AddTradeModalTabComponent,
     AddTradeModalFooterComponent,
-    AddTradeModalNotesComponent
-  ],
+    AddTradeModalNotesComponent,
+    AddTradeModalFormComponent
+],
   standalone: true,
   templateUrl: './add-trade-modal.component.html'
 })

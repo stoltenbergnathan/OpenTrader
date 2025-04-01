@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 
 @Component({
@@ -8,5 +8,5 @@ import { QuillModule } from 'ngx-quill';
     templateUrl: './add-trade-modal-notes.component.html',
 })
 export class AddTradeModalNotesComponent {
-    @Input() tradeEntryForm!: any;
+    @Input() tradeEntryForm!: FormGroup;
 }

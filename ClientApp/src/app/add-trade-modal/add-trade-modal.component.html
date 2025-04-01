@@ -2,37 +2,12 @@
 <div class="modal-body">
   <app-add-trade-modal-tab></app-add-trade-modal-tab>
   <div class="tab-content" id="tradeTabsContent">
-    <div class="tab-pane fade show active" id="trade-details" role="tabpanel">
-      <form [formGroup]="tradeEntryForm" class="mt-3">
-        <div class="row mb-3">
-          <div class="col">
-            <label for="tradeType" class="form-label">Trade Type</label>
-            <select
-              id="tradeType"
-              class="form-select"
-              formControlName="type"
-              required
-            >
-              <option value="" disabled selected>Select Trade Type</option>
-              <option value="stock">Stock</option>
-              <option value="option">Option</option>
-            </select>
-          </div>
-          <div class="col">
-            <label for="symbol" class="form-label">Symbol</label>
-            <input
-              id="symbol"
-              class="form-control"
-              formControlName="symbol"
-              required
-            />
-          </div>
-        </div>
-        <app-add-trade-modal-details-list
-          [tradeForm]="this.tradeEntryForm"
-        ></app-add-trade-modal-details-list>
-      </form>
-    </div>
+    <app-add-trade-modal-form
+      class="tab-pane fade show active"
+      id="trade-details"
+      role="tabpanel"
+      [tradeEntryForm]="this.tradeEntryForm"
+    ></app-add-trade-modal-form>
     <app-add-trade-modal-notes
       class="tab-pane fade"
       id="trade-notes"
