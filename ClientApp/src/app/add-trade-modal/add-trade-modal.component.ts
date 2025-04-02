@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
-import { AddTradeModalHeaderComponent } from './add-trade-modal-header.component';
-import { AddTradeModalTabComponent } from './add-trade-modal-tab.component';
-import { AddTradeModalFooterComponent } from './add-trade-modal-footer.component';
-import { AddTradeModalNotesComponent } from './add-trade-modal-notes.component';
-import { AddTradeModalFormComponent } from "./add-trade-modal-form.component";
+import { HeaderComponent } from './header/header.component';
+import { TabComponent } from './tab/tab.component';
+import { FooterComponent } from './footer/footer.component';
+import { NotesComponent } from './notes/notes.component';
+import { FormComponent } from "./form/form.component";
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -13,11 +13,11 @@ import { NgIf } from '@angular/common';
   imports: [
     NgIf,
     ReactiveFormsModule,
-    AddTradeModalHeaderComponent,
-    AddTradeModalTabComponent,
-    AddTradeModalFooterComponent,
-    AddTradeModalNotesComponent,
-    AddTradeModalFormComponent
+    HeaderComponent,
+    TabComponent,
+    FooterComponent,
+    NotesComponent,
+    FormComponent
 ],
   standalone: true,
   templateUrl: './add-trade-modal.component.html'

@@ -1,22 +1,20 @@
-<app-add-trade-modal-header></app-add-trade-modal-header>
+<addt-modal-header></addt-modal-header>
 <div class="p-4">
-  <app-add-trade-modal-tab
-    (switchTabEvent)="switchTab($event)"
-  ></app-add-trade-modal-tab>
+  <addt-modal-tab (switchTabEvent)="switchTab($event)"></addt-modal-tab>
   <div class="space-y-4">
-    <app-add-trade-modal-form
+    <addt-modal-form
       *ngIf="this.currentTab === 0"
       class="block"
       [tradeEntryForm]="this.tradeEntryForm"
-    ></app-add-trade-modal-form>
-    <app-add-trade-modal-notes
+    ></addt-modal-form>
+    <addt-modal-notes
       *ngIf="this.currentTab === 1"
       class="block"
       [tradeEntryForm]="this.tradeEntryForm"
-    ></app-add-trade-modal-notes>
+    ></addt-modal-notes>
   </div>
 </div>
-<app-add-trade-modal-footer
+<addt-modal-footer
   [tradeEntry]="this.tradeEntry"
   [tradeEntryForm]="this.tradeEntryForm"
-></app-add-trade-modal-footer>
+></addt-modal-footer>

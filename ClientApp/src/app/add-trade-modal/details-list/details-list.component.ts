@@ -3,11 +3,11 @@ import { Component, Input } from '@angular/core';
 import {  FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'app-add-trade-modal-details-list',
+    selector: 'addt-modal-details-list',
     imports: [NgFor, NgIf, ReactiveFormsModule],
-    templateUrl: './add-trade-modal-details-list.component.html'
+    templateUrl: './details-list.component.html'
 })
-export class AddTradeModalDetailsListComponent {
+export class DetailsListComponent {
     @Input() tradeForm!: FormGroup;
 
     constructor(private fb: FormBuilder) {}

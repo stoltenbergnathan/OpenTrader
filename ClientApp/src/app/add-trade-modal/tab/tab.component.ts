@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-add-trade-modal-tab',
-    templateUrl: './add-trade-modal-tab.component.html',
+    selector: 'addt-modal-tab',
+    templateUrl: './tab.component.html',
 })
-export class AddTradeModalTabComponent {
+export class TabComponent {
     @Output() switchTabEvent = new EventEmitter<number>();
 
     activateTab(tab: number) {
