@@ -1,5 +1,5 @@
-<div class="mb-3" [formGroup]="tradeForm">
-  <table class="w-full border-collapse">
+<div [formGroup]="tradeForm">
+  <table class="w-full">
     <thead>
       <tr class="border-b">
         <th class="p-2"></th>
@@ -19,7 +19,7 @@
           <button
             *ngIf="i !== 0"
             type="button"
-            class="w-6 h-6 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600"
+            class="w-6 h-6 bg-red-500 text-white rounded-full hover:bg-red-600"
             (click)="removeTradeRow(i)"
           >
             X
