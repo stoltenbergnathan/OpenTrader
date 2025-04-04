@@ -8,12 +8,12 @@ import {  FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } f
     templateUrl: './details-list.component.html'
 })
 export class DetailsListComponent {
-    @Input() tradeForm!: FormGroup;
+    @Input() tradeEntryForm!: FormGroup;
 
     constructor(private fb: FormBuilder) {}
 
     get trades(): FormArray {
-        return this.tradeForm.get('trades') as FormArray
+        return this.tradeEntryForm.get('trades') as FormArray
     }
 
     removeTradeRow(index: number) {
