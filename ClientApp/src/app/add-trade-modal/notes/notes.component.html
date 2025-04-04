@@ -1,7 +1,8 @@
 <div [formGroup]="tradeEntryForm" class="mt-4">
   <quill-editor
-    class="w-full"
+    class="w-full h-30"
     formControlName="notes"
     [modules]="{ toolbar: false }"
+    [placeholder]="'Enter notes on this trade...'"
   ></quill-editor>
 </div>
