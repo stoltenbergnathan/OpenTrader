@@ -3,10 +3,40 @@
     <thead>
       <tr class="border-b">
         <th class="p-2"></th>
-        <th class="p-2 text-left">Action</th>
-        <th class="p-2 text-left">Date</th>
-        <th class="p-2 text-left">Quantity</th>
-        <th class="p-2 text-left">Price</th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Action
+            <app-tooltip
+              [helperText]="'If the security is being bought or sold'"
+            ></app-tooltip>
+          </div>
+        </th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Date
+            <app-tooltip
+              [helperText]="'The date the trade occured'"
+            ></app-tooltip>
+          </div>
+        </th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Quantity
+            <app-tooltip
+              [helperText]="
+                'The amount of the security that was bought or sold'
+              "
+            ></app-tooltip>
+          </div>
+        </th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Price
+            <app-tooltip
+              [helperText]="'The price the security traded for'"
+            ></app-tooltip>
+          </div>
+        </th>
       </tr>
     </thead>
     <tbody formArrayName="trades">
