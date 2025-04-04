@@ -20,6 +20,7 @@
     *ngIf="tradeEntryForm.errors?.['invalidQuantity'] && (tradeEntryForm.touched || tradeEntryForm.dirty)"
     class="text-red-500 text-sm font-medium"
   >
-    Hey, you can't do that.
+    The quantity of trades sold must not be greater than the quantity of trades
+    bought
   </span>
 </div>
