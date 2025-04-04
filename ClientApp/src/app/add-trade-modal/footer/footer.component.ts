@@ -4,10 +4,11 @@ import { Trade, TradeEntry } from '../../shared/models/trade.model';
 import { TradeService } from '../../trade.service';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AddTradeModalComponent } from '../add-trade-modal.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'addt-modal-footer',
-    imports: [MatDialogModule],
+    imports: [MatDialogModule, NgIf],
     templateUrl: './footer.component.html'
 })
 export class FooterComponent {

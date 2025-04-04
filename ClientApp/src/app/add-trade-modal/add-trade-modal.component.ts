@@ -110,7 +110,7 @@ export class AddTradeModalComponent {
       });
 
       if (totalQuantity < 0) {
-        return {error: true}
+        return {invalidQuantity: true}
       }
       return null;
     } 
