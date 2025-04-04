@@ -41,7 +41,11 @@ export class SimpleTradeViewComponent {
   }
 
   get profit(): number {
-    return this.exitTotal - this.entryTotal;
+    const difference = this.exitTotal - this.entryTotal;
+    if (this.tradeEntry.type === 'stock')
+      return difference;
+    else
+      return difference * 100;
   }
 
   deleteTrade() {
