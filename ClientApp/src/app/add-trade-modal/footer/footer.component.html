@@ -1,0 +1,26 @@
+<div class="flex flex-col items-end gap-2 p-4 border-t">
+  <div class="flex gap-2">
+    <button
+      type="button"
+      class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+      (click)="cancel()"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+      [disabled]="tradeEntryForm.invalid || trades.length === 0"
+      (click)="submitTradeEntry()"
+    >
+      {{ tradeEntry ? "Edit Trade" : "Add Trade" }}
+    </button>
+  </div>
+  <span
+    *ngIf="tradeEntryForm.errors?.['invalidQuantity'] && (tradeEntryForm.touched || tradeEntryForm.dirty)"
+    class="text-red-500 text-sm font-medium"
+  >
+    The quantity of trades sold must not be greater than the quantity of trades
+    bought
+  </span>
+</div>

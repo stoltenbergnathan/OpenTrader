@@ -23,7 +23,7 @@ export class TradeListComponent {
   }
 
   onTradeClick(trade: TradeEntry) {
-    const modalRef = this.dialog.open(AddTradeModalComponent);
+    const modalRef = this.dialog.open(AddTradeModalComponent, {width: '50%', maxWidth: 'none'});
     modalRef.componentInstance.tradeEntry = trade;
   }
 }

@@ -1,16 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { Trade, TradeEntry } from '../shared/models/trade.model';
-import { TradeService } from '../trade.service';
+import { Trade, TradeEntry } from '../../shared/models/trade.model';
+import { TradeService } from '../../trade.service';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { AddTradeModalComponent } from './add-trade-modal.component';
+import { AddTradeModalComponent } from '../add-trade-modal.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-add-trade-modal-footer',
-    imports: [MatDialogModule],
-    templateUrl: './add-trade-modal-footer.component.html'
+    selector: 'addt-modal-footer',
+    imports: [MatDialogModule, NgIf],
+    templateUrl: './footer.component.html'
 })
-export class AddTradeModalFooterComponent {
+export class FooterComponent {
     @Input() tradeEntry!: TradeEntry;
     @Input() tradeEntryForm!: FormGroup;
 

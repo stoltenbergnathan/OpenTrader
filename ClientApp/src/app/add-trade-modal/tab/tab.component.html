@@ -1,0 +1,30 @@
+<ul class="flex border-b">
+  <li>
+    <button
+      class="py-2 px-4 border-b-2 font-medium transition-colors duration-300"
+      [ngClass]="
+        activeTab === 0
+          ? 'border-blue-500 text-blue-500'
+          : 'border-transparent text-gray-600 hover:border-gray-300'
+      "
+      type="button"
+      (click)="activateTab(0)"
+    >
+      Trade Details
+    </button>
+  </li>
+  <li>
+    <button
+      class="py-2 px-4 border-b-2 font-medium transition-colors duration-300"
+      [ngClass]="
+        activeTab === 1
+          ? 'border-blue-500 text-blue-500'
+          : 'border-transparent text-gray-600 hover:border-gray-300'
+      "
+      type="button"
+      (click)="activateTab(1)"
+    >
+      Notes
+    </button>
+  </li>
+</ul>

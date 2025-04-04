@@ -1,19 +1,20 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {  FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TooltipComponent } from "../../shared/tooltip/tooltip.component";
 
 @Component({
-    selector: 'app-add-trade-modal-details-list',
-    imports: [NgFor, NgIf, ReactiveFormsModule],
-    templateUrl: './add-trade-modal-details-list.component.html'
+    selector: 'addt-modal-details-list',
+    imports: [NgFor, NgIf, ReactiveFormsModule, TooltipComponent],
+    templateUrl: './details-list.component.html'
 })
-export class AddTradeModalDetailsListComponent {
-    @Input() tradeForm!: FormGroup;
+export class DetailsListComponent {
+    @Input() tradeEntryForm!: FormGroup;
 
     constructor(private fb: FormBuilder) {}
 
     get trades(): FormArray {
-        return this.tradeForm.get('trades') as FormArray
+        return this.tradeEntryForm.get('trades') as FormArray
     }
 
     removeTradeRow(index: number) {

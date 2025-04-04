@@ -1,12 +1,42 @@
-<div class="mb-3" [formGroup]="tradeForm">
-  <table class="w-full border-collapse">
+<div [formGroup]="tradeEntryForm">
+  <table class="w-full">
     <thead>
       <tr class="border-b">
         <th class="p-2"></th>
-        <th class="p-2 text-left">Action</th>
-        <th class="p-2 text-left">Date</th>
-        <th class="p-2 text-left">Quantity</th>
-        <th class="p-2 text-left">Price</th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Action
+            <app-tooltip
+              [helperText]="'If the security is being bought or sold'"
+            ></app-tooltip>
+          </div>
+        </th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Date
+            <app-tooltip
+              [helperText]="'The date the trade occured'"
+            ></app-tooltip>
+          </div>
+        </th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Quantity
+            <app-tooltip
+              [helperText]="
+                'The amount of the security that was bought or sold'
+              "
+            ></app-tooltip>
+          </div>
+        </th>
+        <th class="p-2 text-left">
+          <div class="flex gap-1.5">
+            Price
+            <app-tooltip
+              [helperText]="'The price the security traded for'"
+            ></app-tooltip>
+          </div>
+        </th>
       </tr>
     </thead>
     <tbody formArrayName="trades">
@@ -19,7 +49,7 @@
           <button
             *ngIf="i !== 0"
             type="button"
-            class="w-6 h-6 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600"
+            class="w-6 h-6 bg-red-500 text-white rounded-full hover:bg-red-600"
             (click)="removeTradeRow(i)"
           >
             X

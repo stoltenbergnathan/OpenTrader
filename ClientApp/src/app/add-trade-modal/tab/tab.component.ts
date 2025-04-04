@@ -1,14 +1,17 @@
+import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-add-trade-modal-tab',
-    templateUrl: './add-trade-modal-tab.component.html',
+    selector: 'addt-modal-tab',
+    imports: [NgClass],
+    templateUrl: './tab.component.html',
 })
-export class AddTradeModalTabComponent {
+export class TabComponent {
     @Output() switchTabEvent = new EventEmitter<number>();
+    activeTab = 0;
 
     activateTab(tab: number) {
-        console.log("Emitting: ", tab)
+        this.activeTab = tab;
         this.switchTabEvent.emit(tab);
     }
 }
