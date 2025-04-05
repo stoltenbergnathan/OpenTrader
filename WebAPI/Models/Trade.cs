@@ -12,5 +12,5 @@ public class Trade
 
     public int TradeEntryId { get; set; }
     [JsonIgnore]
-    public TradeEntry? TradeEntry { get; set; }
+    public required TradeEntry TradeEntry { get; set; }
 }
