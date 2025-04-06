@@ -35,34 +35,29 @@ export class FooterComponent {
                 price: trade.price
             })),
             notes: this.tradeEntryForm.value.notes,
+            tags: []
             };
 
             if (!this.tradeEntry)
             {
             this.tradeService.addTrade(tradeEntry).subscribe({
                 next: (response) => {
-                // Handle successful response here
-                console.log('Trade entry added successfully:', response);
-                this.dialog.close('Trade entry added');
-                }
-                , error: (error) => {
-                // Handle error response here
-                console.error('Error updating trade entry:', error);
-                // Optionally, you can show an error message to the user
+                    console.log('Trade entry added successfully:', response);
+                    this.dialog.close('Trade entry added');
+                },
+                error: (error) => {
+                    console.error('Error updating trade entry:', error);
                 }
             });
             }
             else {
             this.tradeService.updateTrade(tradeEntry).subscribe({
                 next: (response) => {
-                // Handle successful response here
-                console.log('Trade entry updated successfully:', response);
-                this.dialog.close('Trade entry updated');
-                }
-                , error: (error) => {
-                // Handle error response here
-                console.error('Error adding trade entry:', error);
-                // Optionally, you can show an error message to the user
+                    console.log('Trade entry updated successfully:', response);
+                    this.dialog.close('Trade entry updated');
+                },
+                error: (error) => {
+                    console.error('Error adding trade entry:', error);
                 }
             });       
             }
