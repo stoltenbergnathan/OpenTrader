@@ -16,5 +16,10 @@ public class OpenTraderDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Trade>()
+            .HasOne(t => t.TradeEntry)
+            .WithMany(e => e.Trades)
+            .HasForeignKey(t => t.TradeEntryId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

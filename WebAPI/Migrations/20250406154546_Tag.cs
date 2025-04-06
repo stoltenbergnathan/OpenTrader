@@ -5,7 +5,7 @@
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class TagPt : Migration
+    public partial class Tag : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

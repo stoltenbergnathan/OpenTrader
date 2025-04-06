@@ -11,8 +11,8 @@ using WebAPI;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(OpenTraderDbContext))]
-    [Migration("20250405040908_TagPt")]
-    partial class TagPt
+    [Migration("20250406154546_Tag")]
+    partial class Tag
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
