@@ -19,6 +19,12 @@ export class SimpleTradeViewComponent {
     return this.tradeEntry.trades[this.tradeEntry.trades.length - 1];
   }
 
+  get tags(): string {
+    let tags = "";
+    this.tradeEntry.tags.forEach(tag => tags += tag);
+    return tags;
+  }
+
   get totalQuantity(): number {
     return this.tradeEntry.trades.reduce((total, trade) => {
       if (trade.action === "buy")
