@@ -48,6 +48,12 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tags_Name",
+                table: "Tags",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TagTradeEntry_TradeEntriesId",
                 table: "TagTradeEntry",
                 column: "TradeEntriesId");

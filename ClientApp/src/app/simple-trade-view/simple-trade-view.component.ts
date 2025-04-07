@@ -21,7 +21,7 @@ export class SimpleTradeViewComponent {
 
   get tags(): string {
     let tags = "";
-    this.tradeEntry.tags.forEach(tag => tags += tag);
+    this.tradeEntry.tags.forEach(tag => tags += " " + tag.name);
     return tags;
   }
 

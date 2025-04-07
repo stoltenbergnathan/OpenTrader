@@ -11,7 +11,7 @@ using WebAPI;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(OpenTraderDbContext))]
-    [Migration("20250406154546_Tag")]
+    [Migration("20250407000529_Tag")]
     partial class Tag
     {
         /// <inheritdoc />
@@ -45,6 +45,9 @@ namespace WebAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Tags");
                 });

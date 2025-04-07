@@ -17,7 +17,7 @@ public class TagRepository : ITagRepository
         return await _context.Tags.ToListAsync();
     }
 
-    public async Task<Tag?> GetByNameAsync(string name)
+    public async Task<Tag?> GetByNameAsync(string? name)
     {
         return await _context.Tags
             .Where(tag => tag.Name == name)

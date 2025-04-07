@@ -21,6 +21,10 @@ export class FooterComponent {
         return this.tradeEntryForm.get('trades') as FormArray;
     }
 
+    get tags(): FormArray {
+        return this.tradeEntryForm.get('tags') as FormArray
+    }
+
     submitTradeEntry() {
         if (this.tradeEntryForm.valid) {
             let tradeEntry: TradeEntry = {
@@ -35,31 +39,33 @@ export class FooterComponent {
                 price: trade.price
             })),
             notes: this.tradeEntryForm.value.notes,
-            tags: []
+            tags: this.tags.controls.map(tagControl => {
+                return {id: 0, name: tagControl.value}
+            })
             };
 
             if (!this.tradeEntry)
             {
-            this.tradeService.addTrade(tradeEntry).subscribe({
-                next: (response) => {
-                    console.log('Trade entry added successfully:', response);
-                    this.dialog.close('Trade entry added');
-                },
-                error: (error) => {
-                    console.error('Error updating trade entry:', error);
-                }
+                this.tradeService.addTrade(tradeEntry).subscribe({
+                    next: (response) => {
+                        console.log('Trade entry added successfully:', response);
+                        this.dialog.close('Trade entry added');
+                    },
+                    error: (error) => {
+                        console.error('Error updating trade entry:', error);
+                    }
             });
             }
             else {
-            this.tradeService.updateTrade(tradeEntry).subscribe({
-                next: (response) => {
-                    console.log('Trade entry updated successfully:', response);
-                    this.dialog.close('Trade entry updated');
-                },
-                error: (error) => {
-                    console.error('Error adding trade entry:', error);
-                }
-            });       
+                this.tradeService.updateTrade(tradeEntry).subscribe({
+                    next: (response) => {
+                        console.log('Trade entry updated successfully:', response);
+                        this.dialog.close('Trade entry updated');
+                    },
+                    error: (error) => {
+                        console.error('Error adding trade entry:', error);
+                    }
+                });       
             }
         }
     }

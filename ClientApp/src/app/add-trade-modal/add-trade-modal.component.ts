@@ -75,10 +75,13 @@ export class AddTradeModalComponent {
 
   private initializeForm(tradeEntry: TradeEntry) {
       this.tradeEntryForm.patchValue(tradeEntry);
+
       const tradesArray = tradeEntry.trades.length
         ? tradeEntry.trades.map(trade => this.createTradeFormGroup(trade))
         : [this.createEmptyTradeRow()];
       this.tradeEntryForm.setControl('trades', this.fb.array(tradesArray));
+
+      this.tradeEntryForm.setControl('tags', this.fb.array(tradeEntry.tags.map(t => t.name)));
   }
 
   private emptyForm() {
@@ -87,7 +90,8 @@ export class AddTradeModalComponent {
       type: ['', Validators.required],
       symbol: ['', Validators.required],
       trades: this.fb.array([this.createEmptyTradeRow()]),
-      notes: ['']
+      notes: [''],
+      tags: this.fb.array([])
     }, { validators: this.validateQuantity() });
   }
 
