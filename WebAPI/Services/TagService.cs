@@ -36,4 +36,20 @@ public class TagService : ITagService
     {
         return await _tagRepository.DeleteAsync(id);
     }
+
+    public async Task<IEnumerable<Tag>> DeleteUnusedAsync()
+    {
+        var tags = await _tagRepository.GetAllAsync();
+
+        List<Tag> deletedTags = [];
+        foreach (var tag in tags)
+        {
+            if (tag.TradeEntries.Count == 0)
+            {
+                var deletedTag = await _tagRepository.DeleteAsync(tag.Id);
+                deletedTags.Add(deletedTag);
+            }
+        }
+        return deletedTags;
+    }
 }

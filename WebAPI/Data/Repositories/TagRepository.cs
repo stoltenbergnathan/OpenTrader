@@ -14,7 +14,9 @@ public class TagRepository : ITagRepository
 
     public async Task<IEnumerable<Tag>> GetAllAsync()
     {
-        return await _context.Tags.ToListAsync();
+        return await _context.Tags
+            .Include(t => t.TradeEntries)
+            .ToListAsync();
     }
 
     public async Task<Tag?> GetByNameAsync(string? name)

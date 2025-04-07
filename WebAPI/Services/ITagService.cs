@@ -9,4 +9,5 @@ public interface ITagService
     Task<Tag> AddAsync(Tag newTag);
     Task<Tag?> UpdateAsync(int id, Tag updatedTag);
     Task<Tag?> DeleteAsync(int id);
+    Task<IEnumerable<Tag>> DeleteUnusedAsync();
 }

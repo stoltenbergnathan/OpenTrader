@@ -43,11 +43,18 @@ namespace WebAPI.Controllers
             return Ok(tags);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveTag(int id)
         {
             var tags = await _tagService.DeleteAsync(id);
             return Ok(tags);
+        }
+
+        [HttpDelete("unused")]
+        public async Task<IActionResult> RemoveUnusedTags()
+        {
+            var deletedTags = await _tagService.DeleteUnusedAsync();
+            return Ok(deletedTags);
         }
     }
 }
