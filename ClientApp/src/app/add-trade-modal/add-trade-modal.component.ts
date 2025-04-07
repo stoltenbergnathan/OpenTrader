@@ -81,7 +81,7 @@ export class AddTradeModalComponent {
         : [this.createEmptyTradeRow()];
       this.tradeEntryForm.setControl('trades', this.fb.array(tradesArray));
 
-      this.tradeEntryForm.setControl('tags', this.fb.array(tradeEntry.tags.map(t => t.name)));
+      this.tradeEntryForm.setControl('tags', this.fb.array(tradeEntry.tags.map(t => this.fb.group({id: [t.id], name: [t.name]}))));
   }
 
   private emptyForm() {

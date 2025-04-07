@@ -33,8 +33,19 @@ public class TradeRepository : ITradeRepository
 
     public async Task<TradeEntry> AddAsync(TradeEntry newTradeEntry)
     {
+        var resovedTags = new List<Tag>();
+
+        foreach (var tag in newTradeEntry.Tags)
+        {
+            var existingTag = await _tagRepository.GetByNameAsync(tag.Name);
+            resovedTags.Add(existingTag ?? tag);
+        }
+
+        newTradeEntry.Tags = resovedTags;
+
         var addedTradeEntry = await _context.TradeEntries.AddAsync(newTradeEntry);
         await _context.SaveChangesAsync();
+
         return addedTradeEntry.Entity;
     }
 

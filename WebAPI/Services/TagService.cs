@@ -47,7 +47,10 @@ public class TagService : ITagService
             if (tag.TradeEntries.Count == 0)
             {
                 var deletedTag = await _tagRepository.DeleteAsync(tag.Id);
-                deletedTags.Add(deletedTag);
+                if (deletedTag != null)
+                {
+                    deletedTags.Add(deletedTag);
+                }
             }
         }
         return deletedTags;

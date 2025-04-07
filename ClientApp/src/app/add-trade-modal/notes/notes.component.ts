@@ -2,6 +2,8 @@ import { NgFor } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
+import { Tag } from '../../shared/models/trade.model';
+import { TagService } from '../../tag-service';
 
 @Component({
     selector: 'addt-modal-notes',
@@ -12,11 +14,17 @@ export class NotesComponent implements OnInit {
     @Input() tradeEntryForm!: FormGroup;
     
     tagEntryControl!: FormControl;
+    existingTags: Tag[] = [];
 
-    constructor(private fb: FormBuilder) {}
+    constructor(private fb: FormBuilder, private tagService: TagService) {}
 
     ngOnInit(): void {
         this.tagEntryControl = this.fb.control('');
+
+        this.tagService.tradeEntries$.subscribe(tags => {
+            this.existingTags = tags;
+        });
+        this.tagService.getTags().subscribe();
     }
 
     get tags(): FormArray {
@@ -28,8 +36,22 @@ export class NotesComponent implements OnInit {
     }
 
     addTag() {
-        const tag: string = this.tagEntryControl.value?.trim();
-        this.tags.push(this.fb.control(tag));
+        const tagName: string = this.tagEntryControl.value?.trim();
+        const existingTag: Tag | undefined = this.existingTags.find(tag => tag.name === tagName);
+        if (existingTag)
+        {
+            this.tags.push(this.fb.group({
+                id: [existingTag.id],
+                name: [existingTag.name]
+            }));
+        }
+        else
+        {
+            this.tags.push(this.fb.group({
+                id: [0],
+                name: [tagName]
+            }));  
+        }
         this.tagEntryControl.reset();
     }
 }
