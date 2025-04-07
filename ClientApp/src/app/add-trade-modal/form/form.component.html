@@ -16,8 +16,8 @@
         required
       >
         <option value="" disabled selected>Select Trade Type</option>
-        <option value="stock">Stock</option>
-        <option value="option">Option</option>
+        <option [value]="tradeType.Stock">Stock</option>
+        <option [value]="tradeType.Option">Option</option>
       </select>
     </div>
     <div class="w-full md:w-1/2 px-2">

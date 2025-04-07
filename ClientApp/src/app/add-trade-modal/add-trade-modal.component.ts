@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
-import { Trade, TradeEntry } from '../shared/models/trade.model';
+import { Trade, TradeEntry, TradeType } from '../shared/models/trade.model';
 import { HeaderComponent } from './header/header.component';
 import { TabComponent } from './tab/tab.component';
 import { FooterComponent } from './footer/footer.component';
@@ -87,7 +87,7 @@ export class AddTradeModalComponent {
   private emptyForm() {
     this.tradeEntryForm = this.fb.group({
       id: [0],
-      type: ['', Validators.required],
+      type: [TradeType.Stock, Validators.required],
       symbol: ['', Validators.required],
       trades: this.fb.array([this.createEmptyTradeRow()]),
       notes: [''],

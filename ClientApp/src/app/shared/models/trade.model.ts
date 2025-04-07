@@ -14,9 +14,15 @@ export interface Tag {
 export interface TradeEntry
 {
   id: number;
-  type: string;
+  type: TradeType;
   symbol: string;
   trades: Trade[];
   notes: string;
   tags: Tag[];
+}
+
+export enum TradeType
+{
+  Stock = 0,
+  Option = 1
 }

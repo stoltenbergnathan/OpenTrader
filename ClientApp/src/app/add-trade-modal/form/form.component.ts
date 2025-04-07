@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { DetailsListComponent } from "../details-list/details-list.component";
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TooltipComponent } from "../../shared/tooltip/tooltip.component";
+import { TradeType } from '../../shared/models/trade.model';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'addt-modal-form',
@@ -10,4 +12,6 @@ import { TooltipComponent } from "../../shared/tooltip/tooltip.component";
 })
 export class FormComponent {
     @Input() tradeEntryForm!: FormGroup;
+
+    tradeType = TradeType;
 }

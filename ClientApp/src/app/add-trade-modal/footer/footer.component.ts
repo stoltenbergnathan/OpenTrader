@@ -29,7 +29,7 @@ export class FooterComponent {
         if (this.tradeEntryForm.valid) {
             let tradeEntry: TradeEntry = {
                 id: this.tradeEntry ? this.tradeEntry.id : 0,
-                type: this.tradeEntryForm.value.type,
+                type: Number(this.tradeEntryForm.value.type),
                 symbol: this.tradeEntryForm.value.symbol,
                 trades: this.tradeEntryForm.value.trades.map((trade: Trade) => ({
                     id: trade.id !== 0 ? trade.id : 0,

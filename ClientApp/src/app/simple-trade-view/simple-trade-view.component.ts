@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Trade, TradeEntry } from '../shared/models/trade.model';
+import { Trade, TradeEntry, TradeType } from '../shared/models/trade.model';
 import { CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { TradeService } from '../trade.service';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
@@ -46,7 +46,7 @@ export class SimpleTradeViewComponent {
 
   get profit(): number {
     const difference = this.exitTotal - this.entryTotal;
-    if (this.tradeEntry.type === 'stock')
+    if (this.tradeEntry.type === TradeType.Stock)
       return difference;
     else
       return difference * 100;
