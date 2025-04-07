@@ -6,6 +6,11 @@ export interface Trade {
   price: number;
 }
 
+export interface Tag {
+  id: number;
+  name: string;
+}
+
 export interface TradeEntry
 {
   id: number;
@@ -13,4 +18,5 @@ export interface TradeEntry
   symbol: string;
   trades: Trade[];
   notes: string;
+  tags: Tag[];
 }

@@ -36,6 +36,8 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     // Register repositories and services
     services.AddScoped<ITradeRepository, TradeRepository>();
     services.AddScoped<ITradeService, TradeService>();
+    services.AddScoped<ITagRepository, TagRepository>();
+    services.AddScoped<ITagService, TagService>();
 }
 
 void ConfigureMiddleware(WebApplication app)
