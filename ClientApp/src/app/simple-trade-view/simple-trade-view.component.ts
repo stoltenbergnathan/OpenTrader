@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Trade, TradeEntry } from '../shared/models/trade.model';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { TradeService } from '../trade.service';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: '[app-simple-trade-view]',
-  imports: [DatePipe, CurrencyPipe, MatDialogModule],
+  imports: [DatePipe, CurrencyPipe, MatDialogModule, NgFor, NgIf],
   templateUrl: './simple-trade-view.component.html'
 })
 export class SimpleTradeViewComponent {
@@ -19,10 +19,8 @@ export class SimpleTradeViewComponent {
     return this.tradeEntry.trades[this.tradeEntry.trades.length - 1];
   }
 
-  get tags(): string {
-    let tags = "";
-    this.tradeEntry.tags.forEach(tag => tags += " " + tag.name);
-    return tags;
+  get tags(): string[] {
+    return this.tradeEntry.tags.map(t => t.name);
   }
 
   get totalQuantity(): number {

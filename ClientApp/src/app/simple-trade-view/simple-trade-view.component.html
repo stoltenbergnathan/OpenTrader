@@ -1,7 +1,18 @@
 <td class="p-2.5">
   {{ lastTrade.date | date : "MM/dd/yyyy" }}
 </td>
-<td class="p-2.5">{{ this.tags }}</td>
+<td class="p-2.5">
+  <div class="flex flex-wrap gap-0.5 justify-center">
+    <span
+      *ngFor="let tag of this.tags.slice(0, 2)"
+      class="bg-amber-100 rounded-full px-2 mx-1"
+      >{{ tag }}</span
+    >
+    <span *ngIf="tags.length >= 3" class="bg-amber-100 rounded-full px-2 mx-1"
+      >...</span
+    >
+  </div>
+</td>
 <td class="p-2.5">
   {{ tradeEntry.symbol }}
 </td>
