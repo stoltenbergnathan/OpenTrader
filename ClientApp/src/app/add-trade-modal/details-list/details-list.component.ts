@@ -1,11 +1,10 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {  FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TooltipComponent } from "../../shared/tooltip/tooltip.component";
 
 @Component({
     selector: 'addt-modal-details-list',
-    imports: [NgFor, NgIf, ReactiveFormsModule, TooltipComponent],
+    imports: [NgFor, NgIf, ReactiveFormsModule],
     templateUrl: './details-list.component.html'
 })
 export class DetailsListComponent {
