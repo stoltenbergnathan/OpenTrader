@@ -1,4 +1,3 @@
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS api-build
 WORKDIR /src
 COPY WebAPI/WebAPI.csproj ./WebAPI/

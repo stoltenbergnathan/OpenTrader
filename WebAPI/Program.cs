@@ -30,7 +30,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     // Configure database context
     services.AddDbContext<OpenTraderDbContext>(options =>
     {
-        options.UseSqlite("Data Source=opentrader.db");
+        options.UseSqlite("Data Source=data/opentrader.db");
     });
 
     // Register repositories and services
