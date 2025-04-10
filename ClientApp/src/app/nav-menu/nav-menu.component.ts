@@ -13,7 +13,7 @@ export class NavMenuComponent {
   constructor(private dialog: MatDialog) {}
 
   openAddTradeModal() {
-    this.dialog.open(AddTradeModalComponent, {width: '50%', maxWidth: 'none'});
+    this.dialog.open(AddTradeModalComponent, {width: '60%', maxWidth: 'none'});
   }
 
 }

@@ -1,8 +1,24 @@
+<app-navbar (toggleSidebar)="isSidebarOpen = !isSidebarOpen"></app-navbar>
+
 <div class="flex h-screen">
-  <div class="w-64">
+  <!-- Sidebar -->
+  <div
+    class="fixed inset-y-0 z-30 w-64 bg-gray-800 text-white md:relative md:translate-x-0 md:z-auto"
+    [class.-translate-x-full]="!isSidebarOpen"
+    [class.translate-x-0]="isSidebarOpen"
+  >
     <app-nav-menu></app-nav-menu>
   </div>
-  <div class="flex-grow">
+
+  <!-- Overlay for mobile -->
+  <div
+    class="fixed inset-0 bg-black opacity-60 md:hidden"
+    *ngIf="isSidebarOpen"
+    (click)="isSidebarOpen = false"
+  ></div>
+
+  <!-- Content -->
+  <div class="flex-1">
     <router-outlet></router-outlet>
   </div>
 </div>
