@@ -12,14 +12,4 @@ import { NgIf } from '@angular/common';
 })
 export class AppComponent {
   isSidebarOpen = false;
-  screenIsSmall = false;
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.screenIsSmall = window.innerWidth < 768;
-  }
-
-  ngOnInit() {
-    this.screenIsSmall = window.innerWidth < 768;
-  }
 }

@@ -1,9 +1,9 @@
 <app-navbar (toggleSidebar)="isSidebarOpen = !isSidebarOpen"></app-navbar>
 
-<div class="flex h-screen overflow-hidden">
+<div class="flex h-screen">
   <!-- Sidebar -->
   <div
-    class="fixed inset-y-0 left-0 z-30 w-64 bg-gray-800 text-white transform transition-transform duration-200 ease-in-out md:relative md:translate-x-0 md:z-auto"
+    class="fixed inset-y-0 z-30 w-64 bg-gray-800 text-white md:relative md:translate-x-0 md:z-auto"
     [class.-translate-x-full]="!isSidebarOpen"
     [class.translate-x-0]="isSidebarOpen"
   >
@@ -12,13 +12,13 @@
 
   <!-- Overlay for mobile -->
   <div
-    class="fixed inset-0 z-20 bg-black opacity-60 md:hidden"
+    class="fixed inset-0 bg-black opacity-60 md:hidden"
     *ngIf="isSidebarOpen"
     (click)="isSidebarOpen = false"
   ></div>
 
   <!-- Content -->
-  <div class="flex-1 overflow-auto transition-all duration-200">
+  <div class="flex-1">
     <router-outlet></router-outlet>
   </div>
 </div>
