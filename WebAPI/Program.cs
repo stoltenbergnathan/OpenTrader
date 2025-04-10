@@ -55,7 +55,6 @@ void ConfigureMiddleware(WebApplication app)
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
     app.UseRouting();
     app.UseCors("AllowAngularDev");
 
