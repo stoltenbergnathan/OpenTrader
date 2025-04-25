@@ -1,7 +1,13 @@
-<div class="flex">
-  <a *ngFor="let tool of tools" routerLink="{{ tool }}" class="px-4">{{
-    tool
-  }}</a>
+<div class="flex border-b border-gray-200">
+  <a
+    *ngFor="let tool of tools"
+    [routerLink]="tool.path"
+    routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+    class="px-4 py-2 text-gray-600 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 transition duration-150 ease-in-out"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    {{ tool.label }}
+  </a>
 </div>
 
-<router-outlet />
+<div class="p-4"><router-outlet /></div>
