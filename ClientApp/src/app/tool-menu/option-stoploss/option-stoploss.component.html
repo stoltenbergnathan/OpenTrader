@@ -8,7 +8,11 @@
         <input
           id="optionPrice"
           type="text"
-          [currencyMask]="{align: 'left', allowNegative: false, nullable: false}"
+          [currencyMask]="{
+            align: 'left',
+            allowNegative: false,
+            nullable: false
+          }"
           [(ngModel)]="optionPrice"
           name="optionPrice"
           min="0"
@@ -21,7 +25,12 @@
         </label>
         <input
           id="stopLossIncrements"
-          type="number"
+          type="text"
+          [currencyMask]="{
+            align: 'left',
+            allowNegative: false,
+            nullable: false
+          }"
           [(ngModel)]="stopLossIncrements"
           name="stopLossIncrements"
           min="0"
@@ -58,9 +67,18 @@
           <div class="bg-green-50 p-4 rounded-lg shadow">
             <div
               *ngFor="let stop of stopsAbove"
-              class="p-2 border-b border-green-200 last:border-0 text-center"
+              class="p-2 border-b border-green-200 last:border-0 flex justify-between items-center"
             >
-              <span class="text-green-900">{{ stop | currency: "USD" }}</span>
+              <span class="text-green-900 font-medium">{{
+                stop | currency : "USD"
+              }}</span>
+
+              <span class="text-sm text-green-700">
+                {{ (stop - optionPrice) * 100 | currency : "USD" }}
+                <ng-container *ngIf="optionPrice > 0">
+                  ({{ (stop - optionPrice) / optionPrice | percent : "1.1-2" }})
+                </ng-container>
+              </span>
             </div>
           </div>
         </div>
@@ -69,9 +87,9 @@
           <h3 class="text-xl font-semibold text-gray-800">
             Current Option Price
           </h3>
-          <div class="mt-2 bg-blue-50 p-3 rounded-lg shadow">
-            <span class="text-blue-800 font-medium">{{
-              optionPrice | currency: "USD"
+          <div class="mt-2 bg-blue-50 p-3 rounded-lg shadow inline-block">
+            <span class="text-blue-800 font-medium text-lg">{{
+              optionPrice | currency : "USD"
             }}</span>
           </div>
         </div>
@@ -81,9 +99,18 @@
           <div class="bg-red-50 p-4 rounded-lg shadow">
             <div
               *ngFor="let stop of stopsBelow"
-              class="p-2 border-b border-red-100 last:border-0 text-center"
+              class="p-2 border-b border-red-100 last:border-0 flex justify-between items-center"
             >
-              <span class="text-red-900">{{ stop | currency: "USD" }}</span>
+              <span class="text-red-900 font-medium">{{
+                stop | currency : "USD"
+              }}</span>
+
+              <span class="text-sm text-red-700">
+                {{ (stop - optionPrice) * 100 | currency : "USD" }}
+                <ng-container *ngIf="optionPrice > 0">
+                  ({{ (stop - optionPrice) / optionPrice | percent : "1.1-2" }})
+                </ng-container>
+              </span>
             </div>
           </div>
         </div>

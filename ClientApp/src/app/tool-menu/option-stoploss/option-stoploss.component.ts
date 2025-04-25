@@ -1,4 +1,4 @@
-import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { CurrencyPipe, NgFor, NgIf, PercentPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxCurrencyDirective } from 'ngx-currency';
@@ -6,7 +6,14 @@ import { NgxCurrencyDirective } from 'ngx-currency';
 @Component({
   selector: 'app-option-stoploss',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, CurrencyPipe, NgxCurrencyDirective],
+  imports: [
+    FormsModule,
+    NgFor,
+    NgIf,
+    CurrencyPipe,
+    NgxCurrencyDirective,
+    PercentPipe,
+  ],
   templateUrl: './option-stoploss.component.html',
 })
 export class OptionStoplossComponent {
