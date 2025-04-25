@@ -1,0 +1,92 @@
+<div class="flex flex-col md:flex-row gap-6 max-w-4xl mx-auto p-6">
+  <div class="w-full md:w-1/2">
+    <form class="p-6 bg-white rounded-lg shadow-md space-y-4">
+      <div class="flex flex-col">
+        <label class="mb-1 font-medium text-gray-700" for="optionPrice">
+          Option Price
+        </label>
+        <input
+          id="optionPrice"
+          type="number"
+          [(ngModel)]="optionPrice"
+          name="optionPrice"
+          min="0"
+          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label class="mb-1 font-medium text-gray-700" for="stopLossIncrements">
+          Stop Loss Increment
+        </label>
+        <input
+          id="stopLossIncrements"
+          type="number"
+          [(ngModel)]="stopLossIncrements"
+          name="stopLossIncrements"
+          min="0"
+          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label class="mb-1 font-medium text-gray-700" for="incrementsToShow">
+          Increments to Show
+        </label>
+        <input
+          id="incrementsToShow"
+          type="number"
+          [(ngModel)]="incrementsToShow"
+          name="incrementsToShow"
+          min="1"
+          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+    </form>
+  </div>
+
+  <div class="w-full md:w-1/2 md:max-h-[90vh] md:overflow-y-auto">
+    <div
+      *ngIf="!hasValidOptionPrice(); else results"
+      class="text-center text-red-600"
+    >
+      <p>Please enter a valid option price to see the stops.</p>
+    </div>
+    <ng-template #results>
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Stops Above</h3>
+          <div class="bg-green-50 p-4 rounded-lg shadow">
+            <div
+              *ngFor="let stop of stopsAbove"
+              class="p-2 border-b border-green-200 last:border-0 text-center"
+            >
+              <span class="text-green-900">{{ stop | currency: "USD" }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <h3 class="text-xl font-semibold text-gray-800">
+            Current Option Price
+          </h3>
+          <div class="mt-2 bg-blue-50 p-3 rounded-lg shadow">
+            <span class="text-blue-800 font-medium">{{
+              optionPrice | currency: "USD"
+            }}</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Stops Below</h3>
+          <div class="bg-red-50 p-4 rounded-lg shadow">
+            <div
+              *ngFor="let stop of stopsBelow"
+              class="p-2 border-b border-red-100 last:border-0 text-center"
+            >
+              <span class="text-red-900">{{ stop | currency: "USD" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

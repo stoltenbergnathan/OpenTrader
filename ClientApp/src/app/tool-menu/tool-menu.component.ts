@@ -1,11 +1,12 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-tool-menu',
-  imports: [],
+  imports: [NgFor, RouterLink, RouterOutlet],
   templateUrl: './tool-menu.component.html',
-  styleUrl: './tool-menu.component.css'
 })
 export class ToolMenuComponent {
-
+  tools: string[] = ['option-stop-loss'];
 }
