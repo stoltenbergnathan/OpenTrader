@@ -21,6 +21,7 @@
     "@angular/router": "^19.2.0",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/postcss": "^4.0.17",
+    "ngx-currency": "^19.0.0",
     "ngx-quill": "^27.0.1",
     "postcss": "^8.5.3",
     "quill": "^2.0.3",
