@@ -6,14 +6,17 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 @Component({
   selector: 'app-nav-menu',
   imports: [NavButtonComponent, MatDialogModule],
+  standalone: true,
   templateUrl: './nav-menu.component.html',
-  styleUrl: './nav-menu.component.css'
+  styleUrl: './nav-menu.component.css',
 })
 export class NavMenuComponent {
   constructor(private dialog: MatDialog) {}
 
   openAddTradeModal() {
-    this.dialog.open(AddTradeModalComponent, {width: '60%', maxWidth: 'none'});
+    this.dialog.open(AddTradeModalComponent, {
+      width: '60%',
+      maxWidth: 'none',
+    });
   }
-
 }
