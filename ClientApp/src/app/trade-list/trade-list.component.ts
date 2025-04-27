@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-trade-list',
+  standalone: true,
   imports: [NgFor, NgIf, SimpleTradeViewComponent, MatDialogModule],
   templateUrl: './trade-list.component.html',
 })
