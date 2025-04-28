@@ -1,13 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TagServiceService } from './tag-service';
+import { TagService } from './tag-service';
+import { HttpClient } from '@angular/common/http';
 
-describe('TagServiceService', () => {
-  let service: TagServiceService;
+describe('TagService', () => {
+  let service: TagService;
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(TagServiceService);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    TestBed.configureTestingModule({
+      providers: [TagService, { provide: HttpClient, useValue: httpClientSpy }],
+    });
+    service = TestBed.inject(TagService);
   });
 
   it('should be created', () => {

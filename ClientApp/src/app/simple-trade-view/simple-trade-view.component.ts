@@ -8,16 +8,14 @@ import { AddTradeModalComponent } from '../add-trade-modal/add-trade-modal.compo
 
 @Component({
   selector: 'app-simple-trade-view',
+  standalone: true,
   imports: [DatePipe, CurrencyPipe, MatDialogModule, NgFor, NgIf],
   templateUrl: './simple-trade-view.component.html',
 })
 export class SimpleTradeViewComponent {
   @Input() tradeEntry!: TradeEntry;
 
-  constructor(
-    private tradeService: TradeService,
-    private dialog: MatDialog,
-  ) {}
+  constructor(private tradeService: TradeService, private dialog: MatDialog) {}
 
   get lastTrade(): Trade {
     return this.tradeEntry.trades[this.tradeEntry.trades.length - 1];
@@ -41,7 +39,7 @@ export class SimpleTradeViewComponent {
     return this.tradeEntry.trades.reduce(
       (total, trade) =>
         total + (trade.action === 'buy' ? trade.quantity * trade.price : 0),
-      0,
+      0
     );
   }
 
@@ -49,7 +47,7 @@ export class SimpleTradeViewComponent {
     return this.tradeEntry.trades.reduce(
       (total, trade) =>
         total + (trade.action === 'sell' ? trade.quantity * trade.price : 0),
-      0,
+      0
     );
   }
 
