@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToolMenuComponent } from './tool-menu.component';
+import { RouterModule } from '@angular/router';
 
 describe('ToolMenuComponent', () => {
   let component: ToolMenuComponent;
@@ -8,9 +9,8 @@ describe('ToolMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToolMenuComponent]
-    })
-    .compileComponents();
+      imports: [ToolMenuComponent, RouterModule.forRoot([])],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ToolMenuComponent);
     component = fixture.componentInstance;
