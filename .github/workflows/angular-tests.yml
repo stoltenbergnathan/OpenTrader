@@ -25,6 +25,8 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: ./ClientApp
 
       - name: Run tests
         run: npm run ci-test
+        working-directory: ./ClientApp
