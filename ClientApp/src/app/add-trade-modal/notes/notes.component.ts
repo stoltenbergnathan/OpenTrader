@@ -33,11 +33,7 @@ export class NotesComponent implements OnInit {
 
   @ViewChild('tagInputContainer') tagInputContainer!: ElementRef;
 
-  constructor(
-    private fb: FormBuilder,
-    private tagService: TagService,
-    private elementRef: ElementRef
-  ) {}
+  constructor(private fb: FormBuilder, private tagService: TagService) {}
 
   ngOnInit(): void {
     this.tagEntryControl = this.fb.control('');
