@@ -6,6 +6,7 @@ import {
   ElementRef,
   HostListener,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import {
   FormArray,
@@ -18,13 +19,14 @@ import {
 import { QuillModule } from 'ngx-quill';
 import { Tag } from '../../shared/models/trade.model';
 import { TagService } from '../../tag-service';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'addt-modal-notes',
   imports: [QuillModule, ReactiveFormsModule, NgFor, NgIf, FormsModule],
   templateUrl: './notes.component.html',
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
   @Input() tradeEntryForm!: FormGroup;
 
   tagEntryControl!: FormControl;
@@ -33,6 +35,8 @@ export class NotesComponent implements OnInit {
   showTagSuggestions = false;
 
   @ViewChild('tagInputContainer') tagInputContainer!: ElementRef;
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder, private tagService: TagService) {}
 
@@ -43,6 +47,15 @@ export class NotesComponent implements OnInit {
       this.existingTags = returnedTags;
     });
     this.tagService.getTags().subscribe();
+
+    this.tagEntryControl.valueChanges
+      .pipe(debounceTime(200), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(() => this.filterAvailableTags());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   @HostListener('document:click', ['$event'])
@@ -94,17 +107,25 @@ export class NotesComponent implements OnInit {
   }
 
   onTagSuggestionsFocus() {
-    this.filteredTags = this.existingTags.filter(
-      (tag) =>
-        !this.tags.controls.some(
-          (current_tag) => current_tag.get('name')?.value === tag.name
-        )
-    );
+    this.filterAvailableTags();
     this.showTagSuggestions = true;
   }
 
   selectTag(tag: Tag) {
     this.addTag(tag.name);
     this.showTagSuggestions = false;
+  }
+
+  private filterAvailableTags() {
+    const searchTerm = this.tagEntryControl.value?.toLowerCase() || '';
+    this.filteredTags = this.existingTags.filter((tag) => {
+      const alreadyAdded = this.tags.controls.some(
+        (currentTagControl) =>
+          currentTagControl.get('name')?.value?.toLowerCase() ===
+          tag.name.toLowerCase()
+      );
+      const matchesSearchTerm = tag.name.toLowerCase().includes(searchTerm);
+      return !alreadyAdded && matchesSearchTerm;
+    });
   }
 }
