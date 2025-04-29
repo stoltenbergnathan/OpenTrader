@@ -29,6 +29,7 @@ export class NotesComponent implements OnInit {
 
   tagEntryControl!: FormControl;
   existingTags: Tag[] = [];
+  filteredTags: Tag[] = [];
   showTagSuggestions = false;
 
   @ViewChild('tagInputContainer') tagInputContainer!: ElementRef;
@@ -38,8 +39,8 @@ export class NotesComponent implements OnInit {
   ngOnInit(): void {
     this.tagEntryControl = this.fb.control('');
 
-    this.tagService.tradeEntries$.subscribe((tags) => {
-      this.existingTags = tags;
+    this.tagService.tradeEntries$.subscribe((returnedTags) => {
+      this.existingTags = returnedTags;
     });
     this.tagService.getTags().subscribe();
   }
@@ -90,6 +91,16 @@ export class NotesComponent implements OnInit {
     }
     this.tagEntryControl.reset();
     this.showTagSuggestions = false;
+  }
+
+  onTagSuggestionsFocus() {
+    this.filteredTags = this.existingTags.filter(
+      (tag) =>
+        !this.tags.controls.some(
+          (current_tag) => current_tag.get('name')?.value === tag.name
+        )
+    );
+    this.showTagSuggestions = true;
   }
 
   selectTag(tag: Tag) {
